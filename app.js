@@ -29,8 +29,7 @@ app.post('/', (req, res) => {
 
         response.on("end", function () {
             const adhanData = JSON.parse(stockData);
-            const satus_description = adhanData.status_description
-            const message = adhanData.status_error.invalid_query;
+            const satus_description = adhanData.status_description 
             if (response.statusCode === 200 && satus_description === "Success.") {
                 const state = adhanData.state;
                 const country = adhanData.country;
@@ -68,7 +67,7 @@ app.post('/', (req, res) => {
 
             } else if (satus_description != "Success.") {
                   const empty = "";
-
+                  const message ="Could not find your searched location, please use different word/location and try again.";
                 res.render("fail", {
                     "satus_description": message,
                     "state": empty,

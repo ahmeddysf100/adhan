@@ -29,7 +29,9 @@ app.post('/', (req, res) => {
 
         response.on("end", function () {
             const adhanData = JSON.parse(stockData);
-            if (response.statusCode === 200) {
+            const satus_description = adhanData.status_description
+            const message = adhanData.status_error.invalid_query;
+            if (response.statusCode === 200 && satus_description === "Success.") {
                 const state = adhanData.state;
                 const country = adhanData.country;
                 const method = adhanData.prayer_method_name;
@@ -43,32 +45,48 @@ app.post('/', (req, res) => {
                 const asr = adhanData.items[0].asr
                 const maghrib = adhanData.items[0].maghrib
                 const isha = adhanData.items[0].isha
-                const satus_description = adhanData.status_description
-                if (satus_description === "Success.") {
-                    res.render("info", {
-                        "state": state,
-                        "country": country,
-                        "method": method,
-                        "gibla": gibla,
-                        "lat": lat,
-                        "lon": lon,
-                        "date":date,
-                        "fajer":fajer,
-                        "shurooq":shurooq,
-                        "dhuhr":dhuhr,
-                        "asr":asr,
-                        "maghrib":maghrib,
-                        "isha":isha
-                        
-                    })
-                } else {
-                    res.render("fail",{
-                        "satus_description":satus_description
-                    })
-                }
+
+                res.render("info", {
+                    "state": state,
+                    "country": country,
+                    "method": method,
+                    "gibla": gibla,
+                    "lat": lat,
+                    "lon": lon,
+                    "date": date,
+                    "fajer": fajer,
+                    "shurooq": shurooq,
+                    "dhuhr": dhuhr,
+                    "asr": asr,
+                    "maghrib": maghrib,
+                    "isha": isha
+
+                })
 
 
+
+
+            } else if (satus_description != "Success.") {
+                  const empty = "";
+
+                res.render("fail", {
+                    "satus_description": message,
+                    "state": empty,
+                    "country": empty,
+                    "method": empty,
+                    "gibla": empty,
+                    "lat": empty,
+                    "lon": empty,
+                    "date": empty,
+                    "fajer": empty,
+                    "shurooq": empty,
+                    "dhuhr": empty,
+                    "asr": empty,
+                    "maghrib": empty,
+                    "isha": empty
+                })
             }
+
         })
     })
 })

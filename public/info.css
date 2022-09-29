@@ -60,7 +60,7 @@ body {
 
 @media only screen and (max-width: 769px) {
   .center{
-    top: 50%;
+    top: 50% ;
   }
   h2{
     font-size: 1.2rem;
@@ -70,7 +70,10 @@ body {
 
 @media only screen and (max-width: 426px) {
   .center{
-    top: 55%;
+    top: 58%;
+  }
+  h1{
+    font-size: 2rem;
   }
 
 }
@@ -130,9 +133,9 @@ span{
 .date{
   color:cornsilk ; 
   text-shadow: none !important;
-  font-size: 2rem;
+  font-size: 1.5rem;
   margin-bottom: none;
-  margin-top: 1rem;
+  margin-top: 0.5rem;
 }
 
 .gold{
